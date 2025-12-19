@@ -61,14 +61,15 @@ export function createPlayoutAudioWorkletNode<T extends TContext | TNativeContex
         ...options,
         ...fixedOptions
     });
+    const { port } = audioWorkletNode;
     const listener = () => {
-        audioWorkletNode.port.removeEventListener('message', listener);
-        audioWorkletNode.port.close();
+        port.removeEventListener('message', listener);
+        port.close();
         audioWorkletNode.dispatchEvent(new Event('ended'));
     };
 
-    audioWorkletNode.port.addEventListener('message', listener);
-    audioWorkletNode.port.start();
+    port.addEventListener('message', listener);
+    port.start();
 
     Object.defineProperties(audioWorkletNode, {
         port: {
