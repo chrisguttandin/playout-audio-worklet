@@ -48,7 +48,7 @@ export function createPlayoutAudioWorkletNode<T extends TContext | TNativeContex
     const fixedOptions: Required<Pick<TAnyAudioWorkletNodeOptions<T>, TFixedOptions>> = {
         numberOfInputs: 0,
         numberOfOutputs: 1,
-        outputChannelCount: <number[]>[numberOfChannels],
+        outputChannelCount: [numberOfChannels],
         processorOptions: {
             readPointerView,
             startView,
