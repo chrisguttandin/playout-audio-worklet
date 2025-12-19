@@ -1,1 +1,1 @@
-export type TFixedOptions = 'numberOfInputs' | 'numberOfOutputs';
+export type TFixedOptions = 'numberOfInputs' | 'numberOfOutputs' | 'outputChannelCount' | 'processorOptions';
