@@ -7,7 +7,7 @@ import {
     TNativeContext
 } from 'standardized-audio-context';
 import { IPlayoutAudioWorkletNode } from './interfaces';
-import { TAnyPlayoutAudioWorkletNodeOptions, TNativePlayoutAudioWorkletNode } from './types';
+import { TAnyAudioWorkletNodeOptions, TAnyPlayoutAudioWorkletNodeOptions, TFixedOptions, TNativePlayoutAudioWorkletNode } from './types';
 import { worklet } from './worklet/worklet';
 
 /*
@@ -38,11 +38,10 @@ export function createPlayoutAudioWorkletNode<T extends TContext | TNativeContex
     type TAnyPlayoutAudioWorkletNode = T extends TContext ? IPlayoutAudioWorkletNode<T> : TNativePlayoutAudioWorkletNode;
 
     const { numberOfChannels, readPointerView, startView, stopView, storageView, writePointerView } = options;
-    const audioWorkletNode: TAnyAudioWorkletNode = new (<any>audioWorkletNodeConstructor)(context, 'playout-audio-worklet-processor', {
-        ...options,
+    const fixedOptions: Required<Pick<TAnyAudioWorkletNodeOptions<T>, TFixedOptions>> = {
         numberOfInputs: 0,
         numberOfOutputs: 1,
-        outputChannelCount: [numberOfChannels],
+        outputChannelCount: <number[]>[numberOfChannels],
         processorOptions: {
             readPointerView,
             startView,
@@ -50,6 +49,10 @@ export function createPlayoutAudioWorkletNode<T extends TContext | TNativeContex
             storageView,
             writePointerView
         }
+    };
+    const audioWorkletNode: TAnyAudioWorkletNode = new (<any>audioWorkletNodeConstructor)(context, 'playout-audio-worklet-processor', {
+        ...options,
+        ...fixedOptions
     });
     const listener = () => {
         audioWorkletNode.port.removeEventListener('message', listener);
