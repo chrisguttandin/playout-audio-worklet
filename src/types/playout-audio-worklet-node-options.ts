@@ -6,9 +6,9 @@ export type TPlayoutAudioWorkletNodeOptions = Partial<Omit<IAudioWorkletNodeOpti
 
     readPointerView: Uint8Array | Uint16Array | Uint32Array;
 
-    startView: Uint8Array;
+    startView: Uint16Array;
 
-    stopView: Uint8Array;
+    stopView: Uint16Array;
 
     storageView: Float32Array;
 
