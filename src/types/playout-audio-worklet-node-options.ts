@@ -1,7 +1,7 @@
 import { IAudioWorkletNodeOptions } from 'standardized-audio-context';
 import { TFixedOptions } from './fixed-options';
 
-export type TPlayoutAudioWorkletNodeOptions = Omit<IAudioWorkletNodeOptions, TFixedOptions> & {
+export type TPlayoutAudioWorkletNodeOptions = Partial<Omit<IAudioWorkletNodeOptions, TFixedOptions>> & {
     numberOfChannels: number;
 
     readPointerView: Uint8Array | Uint16Array | Uint32Array;

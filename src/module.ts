@@ -32,12 +32,19 @@ export const addPlayoutAudioWorkletModule = async (addAudioWorkletModule: (url: 
 export function createPlayoutAudioWorkletNode<T extends TContext | TNativeContext>(
     audioWorkletNodeConstructor: T extends TContext ? TAudioWorkletNodeConstructor : TNativeAudioWorkletNodeConstructor,
     context: T,
-    options: Partial<TAnyPlayoutAudioWorkletNodeOptions<T>> = {}
+    {
+        numberOfChannels,
+        readPointerView,
+        startView,
+        stopView,
+        storageView,
+        writePointerView,
+        ...options
+    }: TAnyPlayoutAudioWorkletNodeOptions<T>
 ): T extends TContext ? IPlayoutAudioWorkletNode<T> : TNativePlayoutAudioWorkletNode {
     type TAnyAudioWorkletNode = T extends TContext ? IAudioWorkletNode<T> : TNativeAudioWorkletNode;
     type TAnyPlayoutAudioWorkletNode = T extends TContext ? IPlayoutAudioWorkletNode<T> : TNativePlayoutAudioWorkletNode;
 
-    const { numberOfChannels, readPointerView, startView, stopView, storageView, writePointerView } = options;
     const fixedOptions: Required<Pick<TAnyAudioWorkletNodeOptions<T>, TFixedOptions>> = {
         numberOfInputs: 0,
         numberOfOutputs: 1,

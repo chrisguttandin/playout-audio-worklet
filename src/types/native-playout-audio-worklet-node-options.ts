@@ -1,7 +1,7 @@
 import { TNativeAudioWorkletNodeOptions } from 'standardized-audio-context';
 import { TFixedOptions } from './fixed-options';
 
-export type TNativePlayoutAudioWorkletNodeOptions = Omit<TNativeAudioWorkletNodeOptions, TFixedOptions> & {
+export type TNativePlayoutAudioWorkletNodeOptions = Partial<Omit<TNativeAudioWorkletNodeOptions, TFixedOptions>> & {
     numberOfChannels: number;
 
     readPointerView: Uint8Array | Uint16Array | Uint32Array;
