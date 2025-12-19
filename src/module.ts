@@ -43,7 +43,7 @@ export function createPlayoutAudioWorkletNode<T extends TContext | TNativeContex
         numberOfInputs: 0,
         numberOfOutputs: 1,
         outputChannelCount: [numberOfChannels],
-        pocessorOptions: {
+        processorOptions: {
             readPointerView,
             startView,
             stopView,
