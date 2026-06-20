@@ -55,7 +55,6 @@ describe('module', () => {
                     await addPlayoutAudioWorkletModule(createAddAudioWorkletModule(context));
 
                     const numberOfChannels = 1;
-                    // eslint-disable-next-line no-undef
                     const sharedArrayBuffer = new SharedArrayBuffer(524);
                     const readPointerView = new Uint32Array(sharedArrayBuffer, 4, 1);
                     const startView = new Uint16Array(sharedArrayBuffer, 8, 1);
